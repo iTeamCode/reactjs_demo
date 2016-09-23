@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <title>React</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script src="bower_components/react/react.js"></script>
+    <script src="bower_components/react/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+
+    <script type="text/babel">
+    
+    var MessageBox = React.createClass({
+        render:function(){
+            return(
+                <div>
+                    <small>test string!</small>
+                </div>
+            )
+        }
+    });
+
+    var HomeBanner = React.createClass({
+        render:function(){
+
+            var msgList = new Array();
+            for(var i = 0 ; i < 3 ; i++)
+            {
+                msgList.push(<MessageBox key={'msgBox_' + i}/>);
+            }
+            return (
+                <div>
+                    <h1>This is banner.</h1>
+                    <span>This is text.</span>
+                    <br/>
+                    {msgList}
+                </div>
+            );
+        }
+    });
+
+    ReactDOM.render(<HomeBanner/>,
+        document.getElementById('app'),
+        function(){
+            console.log('render finsihed!');
+        });
+    </script>
+</body>
+
+</html>
