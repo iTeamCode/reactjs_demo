@@ -1,0 +1,17 @@
+{
+  "name": "martial-arts",
+  "description": "",
+  "main": "main.js",
+  "authors": [
+    "Alan Luo"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/iTeamCode/reactjs_demo",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

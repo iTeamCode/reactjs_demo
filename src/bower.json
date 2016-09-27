@@ -1,0 +1,13 @@
+{
+  "name": "codepower",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Alan luo <iteamalan@hotmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/iTeamCode/reactjs_demo",
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
