@@ -1,13 +1,13 @@
 # reactjs_demo
 
-#install gulp & bower
+##install gulp & bower
 > npm install -g gulp 
 > npm install -g bower
 
-#install react
+##install react
 > npm install react --save
 
-#install tool
+##install tool
 > npm install --save-dev gulp 
 > npm install --save-dev gulp-concat 
 > npm install --save-dev gulp-react 
@@ -15,6 +15,6 @@
 > npm install --save-dev reactify
 > npm install --save-dev gulp-browserify 
 
-#install bootstrap
+##install bootstrap
 > bower init
 > bower install bootstrap 
