@@ -1,6 +1,8 @@
 var React = require('react');
 
-module.exports = React.createClass({
+
+
+var topBar = React.createClass({
     render: function () {
         return (
             <div className="top">
@@ -15,3 +17,5 @@ module.exports = React.createClass({
         );
     }
 });
+
+module.exports = topBar;
