@@ -58,7 +58,7 @@ var mainComp = ReactDOM.render(
 
 
 
-
+ 
             <div className="headline"><h3>课程简介</h3></div>
             <ul className="thumbnails">
                 <li className="span3">

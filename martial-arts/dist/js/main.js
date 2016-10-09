@@ -250,7 +250,7 @@ var mainComp = ReactDOM.render(
 
 
 
-
+ 
             React.createElement("div", {className: "headline"}, React.createElement("h3", null, "课程简介")), 
             React.createElement("ul", {className: "thumbnails"}, 
                 React.createElement("li", {className: "span3"}, 
