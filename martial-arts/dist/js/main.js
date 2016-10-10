@@ -51,8 +51,8 @@ var HomeNavBar = React.createClass({displayName: "HomeNavBar",
             { title: '首页', subMenus: [] },
             { title: '活动', subMenus: ['每日签到', '套路练习'] },
             { title: '拳谱', subMenus: ['陈氏太极13式', '老架一路', '老架二路'] },
-            { title: '文章', subMenus: ['每日推荐', '习武感悟', '武林资讯'] },
-            { title: '拳友', subMenus: ['个人信息', '我的活动', '我的修行'] },
+            { title: '圈子', subMenus: ['每日推荐', '习武感悟', '武林资讯'] },
+            { title: '修行之路', subMenus: ['个人信息', '我的活动', '我的修行'] },
             { title: '关于我们', subMenus: ['随太极简介', '网站建设', '加入我们'] }
         ];
 
@@ -121,37 +121,41 @@ var React = require('react');
 
 var MasterSlider = React.createClass({displayName: "MasterSlider",
     render: function () {
-        var cssStyle01 = {
+        var cssStyle = {
             maxHeight: '300px',
             boxShadow: ' 0 0 8px #000',
         }
 
-        var cssStyle02 = {
-            maxHeight: '300px',
-            boxShadow: ' 0 0 8px #000',
-        }
+        var data = [
+            {
+                contents: ['泽雷随，内动外悦，人愿随从。','&nbsp; &nbsp; &nbsp; &nbsp; 内动之以德，外悦之以言','则天下之人咸慕其行而随从之'],
+                marks: ['《易经》','第九十篇 - 第 9 节'],
+                image:'assets/plugins/parallax-slider/img/taiji-01.jpg'
+            },
+            {
+                maxHeight: '300px',
+                boxShadow: ' 0 0 8px #000',
+            }
+        ]
 
-        var cssStyle03 = {
-            maxHeight: '310px',
-            boxShadow: ' 0 0 8px #000',
-        }
+
         return (
             React.createElement("div", {className: "slider-inner"}, 
                 React.createElement("div", {id: "da-slider", className: "da-slider"}, 
                     React.createElement("div", {className: "da-slide"}, 
                         React.createElement("h2", null, React.createElement("i", null, "泽雷随，内动外悦，人愿随从。"), React.createElement("br", null), " ", React.createElement("i", null, "        内动之以德，外悦之以言"), " ", React.createElement("br", null), " ", React.createElement("i", null, "则天下之人咸慕其行而随从之"), " "), 
                         React.createElement("p", null, React.createElement("i", null, "《易经》"), "  ", React.createElement("i", null, "第九十篇 - 第 9 节"), " "), 
-                        React.createElement("div", {className: "da-img"}, React.createElement("img", {src: "assets/plugins/parallax-slider/img/taiji-01.jpg", alt: "", style: cssStyle01}))
+                        React.createElement("div", {className: "da-img"}, React.createElement("img", {src: "assets/plugins/parallax-slider/img/taiji-01.jpg", alt: "", style: cssStyle}))
                     ), 
                     React.createElement("div", {className: "da-slide"}, 
                         React.createElement("h2", null, React.createElement("i", null, "君道众随，择善为正"), " ", React.createElement("br", null), " ", React.createElement("i", null, "        舍己随人，随时顺势")), 
                         React.createElement("p", null, React.createElement("i", null, "《易经》"), " ", React.createElement("br", null), " ", React.createElement("i", null, "第八章 - 第 12 节")), 
-                        React.createElement("div", {className: "da-img"}, React.createElement("img", {src: "assets/plugins/parallax-slider/img/taiji-02.jpg", alt: "image01", style: cssStyle01}))
+                        React.createElement("div", {className: "da-img"}, React.createElement("img", {src: "assets/plugins/parallax-slider/img/taiji-02.jpg", alt: "image01", style: cssStyle}))
                     ), 
                     React.createElement("div", {className: "da-slide"}, 
                         React.createElement("h2", null, React.createElement("i", null, "随太极乃自然之太极。"), " ", React.createElement("br", null), " ", React.createElement("i", null, "天人合一之太极也！")), 
                         React.createElement("p", null, React.createElement("i", null, "《随太极》"), " ", React.createElement("br", null), " ", React.createElement("i", null, "第一章 第 4 至 5 小节"), " "), 
-                        React.createElement("div", {className: "da-img"}, React.createElement("img", {src: "assets/plugins/parallax-slider/img/taiji-03.jpg", alt: "image01", style: cssStyle01}))
+                        React.createElement("div", {className: "da-img"}, React.createElement("img", {src: "assets/plugins/parallax-slider/img/taiji-03.jpg", alt: "image01", style: cssStyle}))
                     ), 
                     React.createElement("nav", {className: "da-arrows"}, 
                         React.createElement("span", {className: "da-arrows-prev"}), 
@@ -205,7 +209,7 @@ var mainComp = ReactDOM.render(
         React.createElement("div", {className: "row-fluid purchase margin-bottom-30"}, 
             React.createElement("div", {className: "container"}, 
                 React.createElement("div", {className: "span9"}, 
-                    React.createElement("span", null, "【随太极-简介】"), 
+                    React.createElement("span", null, "【大道至简】"), 
                     React.createElement("p", null, "        太极拳乃内家拳，一动无有不动。动的核心即为内动，也即丹田运动。内动而外随，通过丹田的打圈运动，引发全身特别是梢节的灵动，从而使行拳精气神灵，赏心悦目。《随太极》中的“随”是来自易经八八六十四卦中的第十七卦“随卦”。随太极乃自然之太极，天人合一之太极也！以正养身，以德修心，不违正道，诚心从善。随时顺势，择善而从，均获吉祥！太极推手中要求粘黏连随，随为跟随，相随之意。太极拳要求内外合一，上下相随。松听转棚皆体现在随中。不丢不顶，随其自然。"
                     )
                 ), 
@@ -215,7 +219,7 @@ var mainComp = ReactDOM.render(
 
         React.createElement("div", {className: "container"}, 
 
-  
+
 
             React.createElement("div", {className: "row-fluid"}, 
                 React.createElement("div", {className: "span4"}, 
@@ -250,8 +254,8 @@ var mainComp = ReactDOM.render(
 
 
 
- 
-            React.createElement("div", {className: "headline"}, React.createElement("h3", null, "课程简介")), 
+
+            React.createElement("div", {className: "headline"}, React.createElement("h3", null, "随太极-圈子")), 
             React.createElement("ul", {className: "thumbnails"}, 
                 React.createElement("li", {className: "span3"}, 
                     React.createElement("div", {className: "thumbnail-style thumbnail-kenburn"}, 
@@ -259,8 +263,8 @@ var mainComp = ReactDOM.render(
                             React.createElement("div", {className: "overflow-hidden"}, React.createElement("img", {src: "assets/img/carousel/2.jpg", alt: ""})), 
                             React.createElement("a", {className: "btn-more hover-effect", href: "#"}, "查看详情 +")
                         ), 
-                        React.createElement("h3", null, React.createElement("a", {className: "hover-effect", href: "#"}, "陈氏太极养生班")), 
-                        React.createElement("p", null, "我们相信，做礼拜的时候耶稣会在场，以此来帮助他们清洁自己的灵魂，自己过去一周的罪过，并且在接下来的一周内，有抵抗恶魔做好人的力量。")
+                        React.createElement("h3", null, React.createElement("a", {className: "hover-effect", href: "#"}, "太极与处事之道")), 
+                        React.createElement("p", null, "太极拳名家陈发科曾说过：\"为人之道，以忠实为主；处世之法，以谦和为主。不忠实则无信用；不谦虚则难以进步；不和气则无朋友\"。太极，更重要的是修炼如何做人。")
                     )
                 ), 
                 React.createElement("li", {className: "span3"}, 
@@ -269,8 +273,8 @@ var mainComp = ReactDOM.render(
                             React.createElement("div", {className: "overflow-hidden"}, React.createElement("img", {src: "assets/img/carousel/3.jpg", alt: ""})), 
                             React.createElement("a", {className: "btn-more hover-effect", href: "#"}, "查看详情 +")
                         ), 
-                        React.createElement("h3", null, React.createElement("a", {className: "hover-effect", href: "#"}, "陈氏太极少儿班")), 
-                        React.createElement("p", null, "义工，需要有基督的爱，将真光传给世界。要成为义工必须要明白基督的信仰真谛，最好是基督徒，热心参与教会的服侍，将基督传给世人。 ")
+                        React.createElement("h3", null, React.createElement("a", {className: "hover-effect", href: "#"}, "一年四季最适合练太极的时间")), 
+                        React.createElement("p", null, "人与自然是一个整体，一年四季气候的变化，具有客观规律性，而人类活动和万物生化都要遵循这一客观规律。《素问.宝命全形论》：“人以天地之气生，四时之法成。”")
                     )
                 ), 
                 React.createElement("li", {className: "span3"}, 
@@ -279,8 +283,8 @@ var mainComp = ReactDOM.render(
                             React.createElement("div", {className: "overflow-hidden"}, React.createElement("img", {src: "assets/img/carousel/9.jpg", alt: ""})), 
                             React.createElement("a", {className: "btn-more hover-effect", href: "#"}, "查看详情 +")
                         ), 
-                        React.createElement("h3", null, React.createElement("a", {className: "hover-effect", href: "#"}, "陈氏太极成人班")), 
-                        React.createElement("p", null, "孩子是世界的未来。而主日学也关乎到教会的未来。和弟兄姐妹交流的时候，得着一个孩子，就得着了一个家庭，就得着了一个教会。")
+                        React.createElement("h3", null, React.createElement("a", {className: "hover-effect", href: "#"}, "太极慢生活")), 
+                        React.createElement("p", null, "在陈家沟太极拳祖祠里有三道门：招熟、懂劲、神明，这也是陈式太极拳习练的三个阶段。由招熟而渐悟懂劲, 由懂劲而阶及神明。")
                     )
                 ), 
                 React.createElement("li", {className: "span3"}, 
@@ -289,15 +293,15 @@ var mainComp = ReactDOM.render(
                             React.createElement("div", {className: "overflow-hidden"}, React.createElement("img", {src: "assets/img/carousel/10.jpg", alt: ""})), 
                             React.createElement("a", {className: "btn-more hover-effect", href: "#"}, "查看详情 +")
                         ), 
-                        React.createElement("h3", null, React.createElement("a", {className: "hover-effect", href: "#"}, "陈氏太极提高班")), 
-                        React.createElement("p", null, "灵粮需要每日吃，亮光需要天天照，指针需要经常用，每天阅读圣经，聆听神的话语，靠着圣灵开启心智，逐步认识并进入圣经的真理。")
+                        React.createElement("h3", null, React.createElement("a", {className: "hover-effect", href: "#"}, "练太极需要克服的10大心魔")), 
+                        React.createElement("p", null, "太极拳的修炼过程也是一个克服种种心魔的过程。其中最主要的心魔有十个方面。那么该怎么克服这些心魔呢？练习太极拳只有克服了十大心魔，才能获得正确的心法，沿着正确的大方向不断进步。")
                     )
                 )
             ), 
             React.createElement("div", {className: "row-fluid margin-bottom-20"}, 
                 React.createElement("div", {className: "span8"}, 
-                    React.createElement("div", {className: "headline"}, React.createElement("h3", null, "随太极简介")), 
-                    React.createElement("p", null, React.createElement("img", {className: "pull-left lft-img-margin img-width-200", src: "assets/plugins/parallax-slider/img/1.jpg", alt: ""}), "       西安朱天才太极拳研究会 随太极是陕西省武术协会团体会员单位、西安市武术运动协会单位会员。被国家级非物质文化遗产项目（陈氏太极拳）的代表性传承人、陈氏太极拳第十一代传人、陈家沟太极拳“四大金刚”之一的朱天才大师亲自授权成立的一所集太极拳研究与传承、太极养生、太极拳技击、少儿武术为一体的综合会所。"), 
+                    React.createElement("div", {className: "headline"}, React.createElement("h3", null, "随太极-简介")), 
+                    React.createElement("p", null, React.createElement("img", {className: "pull-left lft-img-margin img-width-200", src: "assets/plugins/parallax-slider/img/1.jpg", alt: ""}), "        西安朱天才太极拳研究会 随太极是陕西省武术协会团体会员单位、西安市武术运动协会单位会员。被国家级非物质文化遗产项目（陈氏太极拳）的代表性传承人、陈氏太极拳第十一代传人、陈家沟太极拳“四大金刚”之一的朱天才大师亲自授权成立的一所集太极拳研究与传承、太极养生、太极拳技击、少儿武术为一体的综合会所。"), 
                     React.createElement("ul", {className: "unstyled"}, 
                         React.createElement("li", null, React.createElement("i", {className: "icon-ok color-green"}), " 地址：西安市电子正街紫薇城市花园对面（怡兴大厦五楼509室）"), 
                         React.createElement("li", null, React.createElement("i", {className: "icon-ok color-green"}), " 电话：13629247575、18991270691、029-88811896"), 
@@ -305,32 +309,27 @@ var mainComp = ReactDOM.render(
                     ), React.createElement("br", null), 
 
                     React.createElement("blockquote", {className: "hero-unify"}, 
-                        React.createElement("p", null, "        神的教会、就是在基督耶稣里成圣、蒙召作圣徒的、以及所有在各处求告我主耶稣基督之名的人。基督是他们的主，也是我们的主。"), 
-                        React.createElement("small", null, "《哥林多前书》 第一章 第 2 小节")
+                        React.createElement("p", null, "        太极拳，是以中国传统儒、道哲学中的太极、阴阳辩证理念为核心思想，集颐养性情、强身健体、技击对抗等多种功能为一体，结合易学的阴阳五行之变化，中医经络学，古代的导引术和吐纳术形成的一种内外兼修、柔和、缓慢、轻灵、刚柔相济的中国传统拳术。"), 
+                        React.createElement("small", null, "摘自《百度百科》 第一章 第 1 小节")
                     )
                 ), 
-  
+
 
                 React.createElement("div", {className: "span4"}, 
-                    React.createElement("div", {className: "headline"}, React.createElement("h3", null, "师资力量")), 
+                    React.createElement("div", {className: "headline"}, React.createElement("h3", null, "功法秘籍")), 
                     React.createElement("div", {id: "myCarousel", className: "carousel slide"}, 
                         React.createElement("div", {className: "carousel-inner"}, 
                             React.createElement("div", {className: "item active"}, 
                                 React.createElement("img", {src: "assets/img/carousel/5.jpg", alt: ""}), 
                                 React.createElement("div", {className: "carousel-caption"}, 
-                                    React.createElement("p", null, "你们要进窄门，因为引到灭亡。")
+                                    React.createElement("p", null, "太极拳的八种劲")
                                 )
                             ), 
-                            React.createElement("div", {className: "item"}, 
-                                React.createElement("img", {src: "assets/img/carousel/4.jpg", alt: ""}), 
-                                React.createElement("div", {className: "carousel-caption"}, 
-                                    React.createElement("p", null, "爱是恒久忍耐，又有恩慈。")
-                                )
-                            ), 
+
                             React.createElement("div", {className: "item"}, 
                                 React.createElement("img", {src: "assets/img/carousel/3.jpg", alt: ""}), 
                                 React.createElement("div", {className: "carousel-caption"}, 
-                                    React.createElement("p", null, "我知道我的救赎主活着，末了必站在地上。")
+                                    React.createElement("p", null, "“彼未动，己先动”")
                                 )
                             )
                         ), 
@@ -342,12 +341,83 @@ var mainComp = ReactDOM.render(
                     )
                 )
             )
+
+        ), 
+
+
+        React.createElement("div", {className: "footer"}, 
+            React.createElement("div", {className: "container"}, 
+                React.createElement("div", {className: "row-fluid"}, 
+                    React.createElement("div", {className: "span4"}, 
+                        React.createElement("div", {className: "headline"}, React.createElement("h3", null, "关于陈氏太极")), 
+                        React.createElement("p", {className: "margin-bottom-25"}, "陈氏太极拳，是太极拳最原始的拳种，是陈王廷集老子阴阳学说创编而成，陈家十四世陈长兴将秘不外传的陈氏太极拳传给了杨露禅，后来陈氏太极拳分成了杨、吴、武、孙、赵堡 五大流派。"), 
+                        
+
+
+                        React.createElement("div", {className: "headline"}, React.createElement("h3", null, "关注我们")), 
+                        React.createElement("p", null, "订阅我们，了解最新活动，了解更多太极知识！"), 
+                        React.createElement("form", {className: "form-inline"}, 
+                            React.createElement("div", {className: "input-append"}, 
+                                React.createElement("input", {type: "text", placeholder: "邮箱地址", className: "input-medium"}), 
+                                React.createElement("button", {className: "btn-u"}, "订阅")
+                            )
+                        )
+                    ), 
+
+                    React.createElement("div", {className: "span4"}, 
+                        React.createElement("div", {className: "posts"}, 
+                            React.createElement("div", {className: "headline"}, React.createElement("h3", null, "最新知识分享")), 
+                            React.createElement("dl", {className: "dl-horizontal"}, 
+                                React.createElement("dt", null, React.createElement("a", {href: "#"}, React.createElement("img", {src: "assets/img/sliders/elastislide/6.jpg", alt: ""}))), 
+                                React.createElement("dd", null, 
+                                    React.createElement("p", null, React.createElement("a", {href: "#"}, "陈式太极拳有着其他太极流派没有的招式套路如跳跃，腾空，跌岔，震脚等。"))
+                                )
+                            ), 
+                            React.createElement("dl", {className: "dl-horizontal"}, 
+                                React.createElement("dt", null, React.createElement("a", {href: "#"}, React.createElement("img", {src: "assets/img/sliders/elastislide/10.jpg", alt: ""}))), 
+                                React.createElement("dd", null, 
+                                    React.createElement("p", null, React.createElement("a", {href: "#"}, "陈式太极拳有陈式老架、新架之分。老架由清初河南温县陈家沟陈王廷所创。"))
+                                )
+                            ), 
+                            React.createElement("dl", {className: "dl-horizontal"}, 
+                                React.createElement("dt", null, React.createElement("a", {href: "#"}, React.createElement("img", {src: "assets/img/sliders/elastislide/11.jpg", alt: ""}))), 
+                                React.createElement("dd", null, 
+                                    React.createElement("p", null, React.createElement("a", {href: "#"}, "陈式太极拳虽有小架、大架之分，但其运动特点基本一致：其在内是意气运动，在外是螺旋缠绕运动。"))
+                                )
+                            )
+                        )
+                    ), 
+
+                    React.createElement("div", {className: "span4"}, 
+
+                        React.createElement("div", {className: "headline"}, React.createElement("h3", null, "联系我们")), 
+                        React.createElement("address", null, 
+                            "地址：西安市电子正街怡兴大厦五楼509室 ", React.createElement("br", null), 
+                            "电话：13629247575、18991270691、029-88811896 ", React.createElement("br", null), 
+                            "联系人：王老师 ", React.createElement("br", null), 
+                            "传真: 029-88811896 ", React.createElement("br", null), 
+                            "邮箱: ", React.createElement("a", {href: "mailto:info@anybiz.com", className: ""}, "info @anybiz.com")
+                        ), 
+
+
+                        React.createElement("div", {className: "headline"}, React.createElement("h3", null, "分享")), 
+                        React.createElement("ul", {className: "social-icons"}, 
+                            React.createElement("li", null, React.createElement("a", {href: "#", "data-original-title": "Feed", className: "social_rss"})), 
+                            React.createElement("li", null, React.createElement("a", {href: "#", "data-original-title": "Facebook", className: "social_facebook"})), 
+                            React.createElement("li", null, React.createElement("a", {href: "#", "data-original-title": "Twitter", className: "social_twitter"})), 
+                            React.createElement("li", null, React.createElement("a", {href: "#", "data-original-title": "Goole Plus", className: "social_googleplus"})), 
+                            React.createElement("li", null, React.createElement("a", {href: "#", "data-original-title": "Pinterest", className: "social_pintrest"})), 
+                            React.createElement("li", null, React.createElement("a", {href: "#", "data-original-title": "Linkedin", className: "social_linkedin"})), 
+                            React.createElement("li", null, React.createElement("a", {href: "#", "data-original-title": "Vimeo", className: "social_vimeo"}))
+                        )
+                    )
+                )
+            )
         )
+
     ),
     document.getElementById('app')
 )
-
-//2046 × 427 的长图 
 
 },{"./components/HeaderBarComp.js":1,"./components/MasterSliderComp.js":2,"./components/TopBarComp.js":3,"react":175,"react-dom":31}],5:[function(require,module,exports){
 (function (process){

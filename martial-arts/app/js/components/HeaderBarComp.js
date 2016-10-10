@@ -50,8 +50,8 @@ var HomeNavBar = React.createClass({
             { title: '首页', subMenus: [] },
             { title: '活动', subMenus: ['每日签到', '套路练习'] },
             { title: '拳谱', subMenus: ['陈氏太极13式', '老架一路', '老架二路'] },
-            { title: '文章', subMenus: ['每日推荐', '习武感悟', '武林资讯'] },
-            { title: '拳友', subMenus: ['个人信息', '我的活动', '我的修行'] },
+            { title: '圈子', subMenus: ['每日推荐', '习武感悟', '武林资讯'] },
+            { title: '修行之路', subMenus: ['个人信息', '我的活动', '我的修行'] },
             { title: '关于我们', subMenus: ['随太极简介', '网站建设', '加入我们'] }
         ];
 
