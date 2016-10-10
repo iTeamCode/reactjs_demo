@@ -137,6 +137,11 @@ var HomeNavBar = React.createClass({displayName: "HomeNavBar",
 
             React.createElement("div", {className: "navbar"}, 
                 React.createElement("div", {className: "navbar-inner"}, 
+                    React.createElement("a", {className: "btn btn-navbar", "data-toggle": "collapse", "data-target": ".nav-collapse"}, 
+                        React.createElement("span", {className: "icon-bar"}), 
+                        React.createElement("span", {className: "icon-bar"}), 
+                        React.createElement("span", {className: "icon-bar"})
+                    ), 
                     React.createElement("div", {className: "nav-collapse collapse"}, 
                         React.createElement("ul", {className: "nav top-2"}, 
                             domMenu, 
@@ -162,8 +167,8 @@ var HomeNavBar = React.createClass({displayName: "HomeNavBar",
 var HomeLogo = React.createClass({displayName: "HomeLogo",
     render: function () {
         var cssStyle = {
-            height:"50px",
-            width:"80px"
+            height: "50px",
+            width: "80px"
         }
         return (
             React.createElement("div", {className: "logo"}, 
@@ -178,8 +183,8 @@ var HeaderBarComp = React.createClass({displayName: "HeaderBarComp",
         return (
             React.createElement("div", {className: "header"}, 
                 React.createElement("div", {className: "container"}, 
-                React.createElement(HomeLogo, null), 
-                React.createElement(HomeNavBar, null)
+                    React.createElement(HomeLogo, null), 
+                    React.createElement(HomeNavBar, null)
                 )
             )
         )
@@ -388,6 +393,11 @@ module.exports = MartialArtsMaterials;
 },{"react":181}],8:[function(require,module,exports){
 var React = require('react');
 
+var contentPannel = React.createClass({displayName: "contentPannel",
+    render: function () {
+
+    }
+})
 var MasterSlider = React.createClass({displayName: "MasterSlider",
     render: function () {
         var cssStyle = {
@@ -395,19 +405,34 @@ var MasterSlider = React.createClass({displayName: "MasterSlider",
             boxShadow: ' 0 0 8px #000',
         }
 
-        var data = [
+        var datas = [
             {
-                contents: ['泽雷随，内动外悦，人愿随从。','&nbsp; &nbsp; &nbsp; &nbsp; 内动之以德，外悦之以言','则天下之人咸慕其行而随从之'],
-                marks: ['《易经》','第九十篇 - 第 9 节'],
-                image:'assets/plugins/parallax-slider/img/taiji-01.jpg'
+                contents: ['泽雷随，内动外悦，人愿随从。', '&nbsp; &nbsp; &nbsp; &nbsp; 内动之以德，外悦之以言', '则天下之人咸慕其行而随从之'],
+                marks: ['《易经》', '第九十篇 - 第 9 节'],
+                image: 'assets/plugins/parallax-slider/img/taiji-01.jpg'
             },
             {
-                maxHeight: '300px',
-                boxShadow: ' 0 0 8px #000',
+                contents: ['君道众随，择善为正', '&nbsp; &nbsp; &nbsp; &nbsp; 舍己随人，随时顺势'],
+                marks: ['《易经》', '第八章 - 第 12 节'],
+                image: 'assets/plugins/parallax-slider/img/taiji-02.jpg'
+            },
+            {
+                contents: ['随太极乃自然之太极。', '天人合一之太极也！'],
+                marks: ['《随太极》', '第一章 第 4 至 5 小节'],
+                image: 'assets/plugins/parallax-slider/img/taiji-03.jpg'
             }
         ]
 
-
+        var domItems = [];
+        datas.forEach(function (data, index) {
+            domItems.push(
+                React.createElement("div", {className: "da-slide"}, 
+                    React.createElement("h2", null, React.createElement("i", null, "泽雷随，内动外悦，人愿随从。"), React.createElement("br", null), " ", React.createElement("i", null, "        内动之以德，外悦之以言"), " ", React.createElement("br", null), " ", React.createElement("i", null, "则天下之人咸慕其行而随从之"), " "), 
+                    React.createElement("p", null, React.createElement("i", null, "《易经》"), "  ", React.createElement("i", null, "第九十篇 - 第 9 节"), " "), 
+                    React.createElement("div", {className: "da-img"}, React.createElement("img", {src: "assets/plugins/parallax-slider/img/taiji-01.jpg", alt: "", style: cssStyle}))
+                )
+            );
+        });
         return (
             React.createElement("div", {className: "slider-inner"}, 
                 React.createElement("div", {id: "da-slider", className: "da-slider"}, 
@@ -483,8 +508,8 @@ var mainComp = ReactDOM.render(
         React.createElement(MasterSliderComp, null), 
         React.createElement(JoinUsComp, null), 
         React.createElement("div", {className: "container"}, 
-            React.createElement(FunctionPanelComp, null), 
             React.createElement("div", {className: "headline"}, React.createElement("h3", null, "随太极-圈子")), 
+            React.createElement(FunctionPanelComp, null), 
             React.createElement(MartialArtsCircleComp, null), 
             React.createElement("div", {className: "row-fluid margin-bottom-20"}, 
                 React.createElement(ClubIntroductionComp, null), 
@@ -494,7 +519,7 @@ var mainComp = ReactDOM.render(
         React.createElement(HomePageFooterComp, null)
     ),
     document.getElementById('app')
-)
+) 
 
 },{"./components/ClubIntroductionComp.js":1,"./components/FunctionPanelComp.js":2,"./components/HeaderBarComp.js":3,"./components/HomePageFooterComp.js":4,"./components/JoinUsComp.js":5,"./components/MartialArtsCircleComp.js":6,"./components/MartialArtsMaterialsComp.js":7,"./components/MasterSliderComp.js":8,"./components/TopBarComp.js":9,"react":181,"react-dom":37}],11:[function(require,module,exports){
 (function (process){

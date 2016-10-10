@@ -65,6 +65,11 @@ var HomeNavBar = React.createClass({
 
             <div className="navbar">
                 <div className="navbar-inner">
+                    <a className="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>
+                        <span className="icon-bar"></span>
+                    </a>
                     <div className="nav-collapse collapse">
                         <ul className="nav top-2">
                             {domMenu}
@@ -90,8 +95,8 @@ var HomeNavBar = React.createClass({
 var HomeLogo = React.createClass({
     render: function () {
         var cssStyle = {
-            height:"50px",
-            width:"80px"
+            height: "50px",
+            width: "80px"
         }
         return (
             <div className="logo">
@@ -106,8 +111,8 @@ var HeaderBarComp = React.createClass({
         return (
             <div className="header">
                 <div className="container">
-                <HomeLogo/>
-                <HomeNavBar/>
+                    <HomeLogo/>
+                    <HomeNavBar/>
                 </div>
             </div>
         )

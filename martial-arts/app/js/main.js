@@ -14,19 +14,19 @@ var HomePageFooterComp = require('./components/HomePageFooterComp.js');
 var mainComp = ReactDOM.render(
     <div>
         <TopBarComp/>
-        <HeaderBarComp/>
+        <HeaderBarComp/> 
         <MasterSliderComp/>
         <JoinUsComp/>
         <div className="container">
-            <FunctionPanelComp/>
             <div className="headline"><h3>随太极-圈子</h3></div>
+            <FunctionPanelComp/> 
             <MartialArtsCircleComp/>
             <div className="row-fluid margin-bottom-20">
                 <ClubIntroductionComp/>
                 <MartialArtsMaterialsComp/>
             </div>
-        </div> 
+        </div>
         <HomePageFooterComp/>
     </div>,
     document.getElementById('app')
-)
+) 
