@@ -393,73 +393,167 @@ module.exports = MartialArtsMaterials;
 },{"react":181}],8:[function(require,module,exports){
 var React = require('react');
 
-var contentPannel = React.createClass({displayName: "contentPannel",
+var ContentPannel = React.createClass({displayName: "ContentPannel",
+    getDefaultProps: function () {
+        return { contents: [] };
+    },
     render: function () {
-
+        var contents = this.props.contents;
+        //full contents.
+        var domContents = [];
+        contents.forEach(function (data, index) {
+            domContents.push(React.createElement("i", {key: index}, data));
+            if (index < contents.length - 1) {
+                domContents.push(React.createElement("br", {key: 'br' + index}));
+            }
+        });
+        return (React.createElement("h2", null, domContents));
     }
-})
-var MasterSlider = React.createClass({displayName: "MasterSlider",
+});
+
+var MarkPannel = React.createClass({displayName: "MarkPannel",
+    getDefaultProps: function () {
+        return { marks: [] };
+    },
     render: function () {
-        var cssStyle = {
+        var marks = this.props.marks;
+        //full marks.
+        var domMarks = [];
+        marks.forEach(function (data, index) {
+            domMarks.push(React.createElement("i", {key: index}, data));
+            if (index < marks.length - 1) {
+                domMarks.push(React.createElement("br", {key: 'br' + index}));
+            }
+        });
+        return (React.createElement("p", null, domMarks));
+    }
+});
+
+var MasterSlider = React.createClass({displayName: "MasterSlider",
+
+    getDefaultProps: function () {
+        return { sliderItems: [] }
+    },
+    getInitialState: function () {
+        //check props.
+        var _sliderItems = this.props.sliderItems || [];
+        console.log(_sliderItems);
+        var _state = {
+            sliderCount: _sliderItems.length,
+            currentBgPosition: 0,
+            currentIndex: 0,
+            prevIndex: 0,
+            moveDirection: 'none',// right or left
+            isFirst: true
+        };
+        return _state;
+    },
+    componentDidMount: function () {
+        this.setState({ isFirst: false });
+    },
+    handlePrev: function () { this.changeSlider('prev') },
+    handleNext: function () { this.changeSlider('next') },
+    changeSlider: function (action) {
+        var count = this.state.sliderCount
+        var prev = this.state.currentIndex;
+        var current = 0;
+        var direction = "none";
+        var bgPosition = this.state.currentBgPosition;
+
+        switch (action) {
+            case 'prev':
+                current = (prev + count - 1) % count;
+                direction = "left";
+                bgPosition = bgPosition + 30;
+                break;
+            case 'next':
+                current = (prev + 1) % count;
+                direction = "right";
+                bgPosition = bgPosition - 30;
+                break;
+            default:
+                break;
+        }
+        this.setState({
+            currentIndex: current,
+            prevIndex: prev,
+            moveDirection: direction,
+            currentBgPosition: bgPosition
+        });
+
+    },
+    //===> render bengin
+    render: function () {
+        var imgCssStyle = {
             maxHeight: '300px',
             boxShadow: ' 0 0 8px #000',
         }
-
-        var datas = [
-            {
-                contents: ['泽雷随，内动外悦，人愿随从。', '&nbsp; &nbsp; &nbsp; &nbsp; 内动之以德，外悦之以言', '则天下之人咸慕其行而随从之'],
-                marks: ['《易经》', '第九十篇 - 第 9 节'],
-                image: 'assets/plugins/parallax-slider/img/taiji-01.jpg'
-            },
-            {
-                contents: ['君道众随，择善为正', '&nbsp; &nbsp; &nbsp; &nbsp; 舍己随人，随时顺势'],
-                marks: ['《易经》', '第八章 - 第 12 节'],
-                image: 'assets/plugins/parallax-slider/img/taiji-02.jpg'
-            },
-            {
-                contents: ['随太极乃自然之太极。', '天人合一之太极也！'],
-                marks: ['《随太极》', '第一章 第 4 至 5 小节'],
-                image: 'assets/plugins/parallax-slider/img/taiji-03.jpg'
-            }
-        ]
-
+        var datas = this.props.sliderItems;
         var domItems = [];
+        var domDots = [];
+        var _state = this.state;
+
         datas.forEach(function (data, index) {
+            var _className = 'da-slide';
+
+            if (_state.isFirst) {
+                _className += " da-slide-current";
+            }
+            else {
+                var strFormTo = null;
+                var strDirection = null;
+                if (_state.currentIndex == index) {
+                    _className += " da-slide-current";
+                    strFormTo = "from";
+                    switch (_state.moveDirection) {
+                        case "right":
+                            strDirection = "left";
+                            break;
+                        case "left":
+                            strDirection = "right";
+                            break;
+                        default: break;
+                    }
+                }
+                else if (_state.prevIndex == index) {
+                    strFormTo = "to";
+                    strDirection = _state.moveDirection;
+                }
+
+                //da-slide-fromright , da-slide-fromleft , da-slide-toright , da-slide-toleft
+                _className += " da-slide-" + strFormTo + strDirection;
+            }
+
             domItems.push(
-                React.createElement("div", {className: "da-slide"}, 
-                    React.createElement("h2", null, React.createElement("i", null, "泽雷随，内动外悦，人愿随从。"), React.createElement("br", null), " ", React.createElement("i", null, "        内动之以德，外悦之以言"), " ", React.createElement("br", null), " ", React.createElement("i", null, "则天下之人咸慕其行而随从之"), " "), 
-                    React.createElement("p", null, React.createElement("i", null, "《易经》"), "  ", React.createElement("i", null, "第九十篇 - 第 9 节"), " "), 
-                    React.createElement("div", {className: "da-img"}, React.createElement("img", {src: "assets/plugins/parallax-slider/img/taiji-01.jpg", alt: "", style: cssStyle}))
+                React.createElement("div", {key: 'divSlide_' + index, className: _className}, 
+                    React.createElement(ContentPannel, {key: 'homeContent_' + index, contents: data.contents}), 
+                    React.createElement(MarkPannel, {key: 'homeMark_' + index, marks: data.marks}), 
+                    React.createElement("div", {className: "da-img"}, React.createElement("img", {src: data.imageUrl, alt: "", style: imgCssStyle}))
                 )
             );
+
+
+            domDots.push(React.createElement("span", {className: "da-dots-current"}))
         });
+
+        var _cssStyle = { backgroundPosition: this.state.currentBgPosition + '% 0%' }
         return (
             React.createElement("div", {className: "slider-inner"}, 
-                React.createElement("div", {id: "da-slider", className: "da-slider"}, 
-                    React.createElement("div", {className: "da-slide"}, 
-                        React.createElement("h2", null, React.createElement("i", null, "泽雷随，内动外悦，人愿随从。"), React.createElement("br", null), " ", React.createElement("i", null, "        内动之以德，外悦之以言"), " ", React.createElement("br", null), " ", React.createElement("i", null, "则天下之人咸慕其行而随从之"), " "), 
-                        React.createElement("p", null, React.createElement("i", null, "《易经》"), "  ", React.createElement("i", null, "第九十篇 - 第 9 节"), " "), 
-                        React.createElement("div", {className: "da-img"}, React.createElement("img", {src: "assets/plugins/parallax-slider/img/taiji-01.jpg", alt: "", style: cssStyle}))
-                    ), 
-                    React.createElement("div", {className: "da-slide"}, 
-                        React.createElement("h2", null, React.createElement("i", null, "君道众随，择善为正"), " ", React.createElement("br", null), " ", React.createElement("i", null, "        舍己随人，随时顺势")), 
-                        React.createElement("p", null, React.createElement("i", null, "《易经》"), " ", React.createElement("br", null), " ", React.createElement("i", null, "第八章 - 第 12 节")), 
-                        React.createElement("div", {className: "da-img"}, React.createElement("img", {src: "assets/plugins/parallax-slider/img/taiji-02.jpg", alt: "image01", style: cssStyle}))
-                    ), 
-                    React.createElement("div", {className: "da-slide"}, 
-                        React.createElement("h2", null, React.createElement("i", null, "随太极乃自然之太极。"), " ", React.createElement("br", null), " ", React.createElement("i", null, "天人合一之太极也！")), 
-                        React.createElement("p", null, React.createElement("i", null, "《随太极》"), " ", React.createElement("br", null), " ", React.createElement("i", null, "第一章 第 4 至 5 小节"), " "), 
-                        React.createElement("div", {className: "da-img"}, React.createElement("img", {src: "assets/plugins/parallax-slider/img/taiji-03.jpg", alt: "image01", style: cssStyle}))
-                    ), 
+                React.createElement("div", {id: "da-slider", className: "da-slider", style: _cssStyle}, 
+                    domItems, 
                     React.createElement("nav", {className: "da-arrows"}, 
-                        React.createElement("span", {className: "da-arrows-prev"}), 
-                        React.createElement("span", {className: "da-arrows-next"})
+                        React.createElement("span", {className: "da-arrows-prev", onClick: this.handlePrev}), 
+                        React.createElement("span", {className: "da-arrows-next", onClick: this.handleNext})
+                    ), 
+                    React.createElement("nav", {className: "da-dots"}, 
+                        domDots
                     )
                 )
             )
         )
-    }
+    }//===> render end
 });
+
 
 
 module.exports = MasterSlider;
@@ -501,11 +595,29 @@ var ClubIntroductionComp = require('./components/ClubIntroductionComp.js');
 var MartialArtsMaterialsComp = require('./components/MartialArtsMaterialsComp.js');
 var HomePageFooterComp = require('./components/HomePageFooterComp.js');
 
+ 
+var _sliderItems = [
+    {
+        contents: ['泽雷随，内动外悦，人愿随从。', '内动之以德，外悦之以言', '则天下之人咸慕其行而随从之。'],
+        marks: ['《易经》', '第九十篇 - 第 9 节'],
+        imageUrl: 'assets/plugins/parallax-slider/img/taiji-01.jpg'
+    },
+    {
+        contents: ['君道众随，择善为正', '舍己随人，随时顺势。'],
+        marks: ['《易经》', '第八章 - 第 12 节'],
+        imageUrl: 'assets/plugins/parallax-slider/img/taiji-02.jpg'
+    },
+    {
+        contents: ['随太极乃自然之太极。', '天人合一之太极也！'],
+        marks: ['《随太极》', '第一章 第 4 至 5 小节'],
+        imageUrl: 'assets/plugins/parallax-slider/img/taiji-03.jpg'
+    }
+]; 
 var mainComp = ReactDOM.render(
     React.createElement("div", null, 
         React.createElement(TopBarComp, null), 
         React.createElement(HeaderBarComp, null), 
-        React.createElement(MasterSliderComp, null), 
+        React.createElement(MasterSliderComp, {sliderItems: _sliderItems}), 
         React.createElement(JoinUsComp, null), 
         React.createElement("div", {className: "container"}, 
             React.createElement("div", {className: "headline"}, React.createElement("h3", null, "随太极-圈子")), 
@@ -518,8 +630,10 @@ var mainComp = ReactDOM.render(
         ), 
         React.createElement(HomePageFooterComp, null)
     ),
-    document.getElementById('app')
+    document.getElementById('app') 
 ) 
+   
+
 
 },{"./components/ClubIntroductionComp.js":1,"./components/FunctionPanelComp.js":2,"./components/HeaderBarComp.js":3,"./components/HomePageFooterComp.js":4,"./components/JoinUsComp.js":5,"./components/MartialArtsCircleComp.js":6,"./components/MartialArtsMaterialsComp.js":7,"./components/MasterSliderComp.js":8,"./components/TopBarComp.js":9,"react":181,"react-dom":37}],11:[function(require,module,exports){
 (function (process){

@@ -1,72 +1,166 @@
 var React = require('react');
 
-var contentPannel = React.createClass({
+var ContentPannel = React.createClass({
+    getDefaultProps: function () {
+        return { contents: [] };
+    },
     render: function () {
-
+        var contents = this.props.contents;
+        //full contents.
+        var domContents = [];
+        contents.forEach(function (data, index) {
+            domContents.push(<i key={index}>{data}</i>);
+            if (index < contents.length - 1) {
+                domContents.push(<br key={'br' + index}/>);
+            }
+        });
+        return (<h2>{domContents}</h2>);
     }
-})
-var MasterSlider = React.createClass({
+});
+
+var MarkPannel = React.createClass({
+    getDefaultProps: function () {
+        return { marks: [] };
+    },
     render: function () {
-        var cssStyle = {
+        var marks = this.props.marks;
+        //full marks.
+        var domMarks = [];
+        marks.forEach(function (data, index) {
+            domMarks.push(<i key={index}>{data}</i>);
+            if (index < marks.length - 1) {
+                domMarks.push(<br key={'br' + index}/>);
+            }
+        });
+        return (<p>{domMarks}</p>);
+    }
+});
+
+var MasterSlider = React.createClass({
+
+    getDefaultProps: function () {
+        return { sliderItems: [] }
+    },
+    getInitialState: function () {
+        //check props.
+        var _sliderItems = this.props.sliderItems || [];
+        console.log(_sliderItems);
+        var _state = {
+            sliderCount: _sliderItems.length,
+            currentBgPosition: 0,
+            currentIndex: 0,
+            prevIndex: 0,
+            moveDirection: 'none',// right or left
+            isFirst: true
+        };
+        return _state;
+    },
+    componentDidMount: function () {
+        this.setState({ isFirst: false });
+    },
+    handlePrev: function () { this.changeSlider('prev') },
+    handleNext: function () { this.changeSlider('next') },
+    changeSlider: function (action) {
+        var count = this.state.sliderCount
+        var prev = this.state.currentIndex;
+        var current = 0;
+        var direction = "none";
+        var bgPosition = this.state.currentBgPosition;
+
+        switch (action) {
+            case 'prev':
+                current = (prev + count - 1) % count;
+                direction = "left";
+                bgPosition = bgPosition + 30;
+                break;
+            case 'next':
+                current = (prev + 1) % count;
+                direction = "right";
+                bgPosition = bgPosition - 30;
+                break;
+            default:
+                break;
+        }
+        this.setState({
+            currentIndex: current,
+            prevIndex: prev,
+            moveDirection: direction,
+            currentBgPosition: bgPosition
+        });
+
+    },
+    //===> render bengin
+    render: function () {
+        var imgCssStyle = {
             maxHeight: '300px',
             boxShadow: ' 0 0 8px #000',
         }
-
-        var datas = [
-            {
-                contents: ['泽雷随，内动外悦，人愿随从。', '&nbsp; &nbsp; &nbsp; &nbsp; 内动之以德，外悦之以言', '则天下之人咸慕其行而随从之'],
-                marks: ['《易经》', '第九十篇 - 第 9 节'],
-                image: 'assets/plugins/parallax-slider/img/taiji-01.jpg'
-            },
-            {
-                contents: ['君道众随，择善为正', '&nbsp; &nbsp; &nbsp; &nbsp; 舍己随人，随时顺势'],
-                marks: ['《易经》', '第八章 - 第 12 节'],
-                image: 'assets/plugins/parallax-slider/img/taiji-02.jpg'
-            },
-            {
-                contents: ['随太极乃自然之太极。', '天人合一之太极也！'],
-                marks: ['《随太极》', '第一章 第 4 至 5 小节'],
-                image: 'assets/plugins/parallax-slider/img/taiji-03.jpg'
-            }
-        ]
-
+        var datas = this.props.sliderItems;
         var domItems = [];
+        var domDots = [];
+        var _state = this.state;
+
         datas.forEach(function (data, index) {
+            var _className = 'da-slide';
+
+            if (_state.isFirst) {
+                _className += " da-slide-current";
+            }
+            else {
+                var strFormTo = null;
+                var strDirection = null;
+                if (_state.currentIndex == index) {
+                    _className += " da-slide-current";
+                    strFormTo = "from";
+                    switch (_state.moveDirection) {
+                        case "right":
+                            strDirection = "left";
+                            break;
+                        case "left":
+                            strDirection = "right";
+                            break;
+                        default: break;
+                    }
+                }
+                else if (_state.prevIndex == index) {
+                    strFormTo = "to";
+                    strDirection = _state.moveDirection;
+                }
+
+                //da-slide-fromright , da-slide-fromleft , da-slide-toright , da-slide-toleft
+                _className += " da-slide-" + strFormTo + strDirection;
+            }
+
             domItems.push(
-                <div className="da-slide">
-                    <h2><i>泽雷随，内动外悦，人愿随从。</i><br /> <i>&nbsp; &nbsp; &nbsp; &nbsp; 内动之以德，外悦之以言</i> <br /> <i>则天下之人咸慕其行而随从之</i> </h2>
-                    <p><i>《易经》</i>  <i>第九十篇 - 第 9 节</i> </p>
-                    <div className="da-img"><img src="assets/plugins/parallax-slider/img/taiji-01.jpg" alt="" style={cssStyle} /></div>
+                <div key={'divSlide_' + index} className={_className}>
+                    <ContentPannel key={'homeContent_' + index} contents={data.contents}/>
+                    <MarkPannel key={'homeMark_' + index} marks={data.marks}/>
+                    <div className="da-img"><img src={data.imageUrl} alt="" style={imgCssStyle} /></div>
                 </div>
             );
+
+
+            domDots.push(<span className="da-dots-current"></span>)
         });
+
+        var _cssStyle = { backgroundPosition: this.state.currentBgPosition + '% 0%' }
         return (
             <div className="slider-inner">
-                <div id="da-slider" className="da-slider">
-                    <div className="da-slide">
-                        <h2><i>泽雷随，内动外悦，人愿随从。</i><br /> <i>&nbsp; &nbsp; &nbsp; &nbsp; 内动之以德，外悦之以言</i> <br /> <i>则天下之人咸慕其行而随从之</i> </h2>
-                        <p><i>《易经》</i>  <i>第九十篇 - 第 9 节</i> </p>
-                        <div className="da-img"><img src="assets/plugins/parallax-slider/img/taiji-01.jpg" alt="" style={cssStyle} /></div>
-                    </div>
-                    <div className="da-slide">
-                        <h2><i>君道众随，择善为正</i> <br /> <i>&nbsp; &nbsp; &nbsp; &nbsp; 舍己随人，随时顺势</i></h2>
-                        <p><i>《易经》</i> <br /> <i>第八章 - 第 12 节</i></p>
-                        <div className="da-img"><img src="assets/plugins/parallax-slider/img/taiji-02.jpg" alt="image01" style={cssStyle}/></div>
-                    </div>
-                    <div className="da-slide">
-                        <h2><i>随太极乃自然之太极。</i> <br /> <i>天人合一之太极也！</i></h2>
-                        <p><i>《随太极》</i> <br /> <i>第一章 第 4 至 5 小节</i> </p>
-                        <div className="da-img"><img src="assets/plugins/parallax-slider/img/taiji-03.jpg" alt="image01" style={cssStyle}/></div>
-                    </div>
+                <div id="da-slider" className="da-slider" style={_cssStyle}>
+                    {domItems}
                     <nav className="da-arrows">
-                        <span className="da-arrows-prev"></span>
-                        <span className="da-arrows-next"></span>
+                        <span className="da-arrows-prev" onClick={this.handlePrev }></span>
+                        <span className="da-arrows-next" onClick={this.handleNext }></span>
+                    </nav>
+                    <nav className="da-dots">
+                        {domDots}
                     </nav>
                 </div>
             </div>
         )
-    }
+    }//===> render end
 });
+
 
 
 module.exports = MasterSlider;
