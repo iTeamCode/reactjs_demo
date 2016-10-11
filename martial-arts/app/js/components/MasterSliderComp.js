@@ -37,14 +37,12 @@ var MarkPannel = React.createClass({
 });
 
 var MasterSlider = React.createClass({
-
     getDefaultProps: function () {
         return { sliderItems: [] }
     },
     getInitialState: function () {
         //check props.
         var _sliderItems = this.props.sliderItems || [];
-        console.log(_sliderItems);
         var _state = {
             sliderCount: _sliderItems.length,
             currentBgPosition: 0,
@@ -57,9 +55,24 @@ var MasterSlider = React.createClass({
     },
     componentDidMount: function () {
         this.setState({ isFirst: false });
+        this.resetSliderPannel();
+    },
+    componentDidUpdate: function () {
+        this.resetSliderPannel();
     },
     handlePrev: function () { this.changeSlider('prev') },
     handleNext: function () { this.changeSlider('next') },
+    _intervalId: 0,
+    resetSliderPannel: function () {
+        clearInterval(this._intervalId);
+        var moveNext = this.changeSlider;
+        var id = setInterval(function () {
+            moveNext("next");
+        }, 8000);
+        this._intervalId = id;
+        //console.log('resetSliderPannel');
+        //console.log(this._intervalId);
+    },
     changeSlider: function (action) {
         var count = this.state.sliderCount
         var prev = this.state.currentIndex;
@@ -70,13 +83,13 @@ var MasterSlider = React.createClass({
         switch (action) {
             case 'prev':
                 current = (prev + count - 1) % count;
-                direction = "left";
-                bgPosition = bgPosition + 30;
+                direction = "right";
+                bgPosition = bgPosition - 30;
                 break;
             case 'next':
                 current = (prev + 1) % count;
-                direction = "right";
-                bgPosition = bgPosition - 30;
+                direction = "left";
+                bgPosition = bgPosition + 30;
                 break;
             default:
                 break;
@@ -101,16 +114,19 @@ var MasterSlider = React.createClass({
         var _state = this.state;
 
         datas.forEach(function (data, index) {
-            var _className = 'da-slide';
-
+            //set slider item.
+            var _sliderClassName = 'da-slide';
+            var _dotsClassName = '';
             if (_state.isFirst) {
-                _className += " da-slide-current";
+                _sliderClassName += " da-slide-current";
+                if (index == 0) { _dotsClassName += "da-dots-current"; }
             }
             else {
                 var strFormTo = null;
                 var strDirection = null;
                 if (_state.currentIndex == index) {
-                    _className += " da-slide-current";
+                    _dotsClassName += "da-dots-current";
+                    _sliderClassName += " da-slide-current";
                     strFormTo = "from";
                     switch (_state.moveDirection) {
                         case "right":
@@ -128,19 +144,19 @@ var MasterSlider = React.createClass({
                 }
 
                 //da-slide-fromright , da-slide-fromleft , da-slide-toright , da-slide-toleft
-                _className += " da-slide-" + strFormTo + strDirection;
+                _sliderClassName += " da-slide-" + strFormTo + strDirection;
             }
 
             domItems.push(
-                <div key={'divSlide_' + index} className={_className}>
+                <div key={'divSlide_' + index} className={_sliderClassName}>
                     <ContentPannel key={'homeContent_' + index} contents={data.contents}/>
                     <MarkPannel key={'homeMark_' + index} marks={data.marks}/>
                     <div className="da-img"><img src={data.imageUrl} alt="" style={imgCssStyle} /></div>
                 </div>
             );
 
-
-            domDots.push(<span className="da-dots-current"></span>)
+            //set slider item.
+            domDots.push(<span key={'dots_' + index} className={_dotsClassName}></span>)
         });
 
         var _cssStyle = { backgroundPosition: this.state.currentBgPosition + '% 0%' }
@@ -160,7 +176,5 @@ var MasterSlider = React.createClass({
         )
     }//===> render end
 });
-
-
 
 module.exports = MasterSlider;

@@ -430,14 +430,12 @@ var MarkPannel = React.createClass({displayName: "MarkPannel",
 });
 
 var MasterSlider = React.createClass({displayName: "MasterSlider",
-
     getDefaultProps: function () {
         return { sliderItems: [] }
     },
     getInitialState: function () {
         //check props.
         var _sliderItems = this.props.sliderItems || [];
-        console.log(_sliderItems);
         var _state = {
             sliderCount: _sliderItems.length,
             currentBgPosition: 0,
@@ -450,9 +448,24 @@ var MasterSlider = React.createClass({displayName: "MasterSlider",
     },
     componentDidMount: function () {
         this.setState({ isFirst: false });
+        this.resetSliderPannel();
+    },
+    componentDidUpdate: function () {
+        this.resetSliderPannel();
     },
     handlePrev: function () { this.changeSlider('prev') },
     handleNext: function () { this.changeSlider('next') },
+    _intervalId: 0,
+    resetSliderPannel: function () {
+        clearInterval(this._intervalId);
+        var moveNext = this.changeSlider;
+        var id = setInterval(function () {
+            moveNext("next");
+        }, 8000);
+        this._intervalId = id;
+        //console.log('resetSliderPannel');
+        //console.log(this._intervalId);
+    },
     changeSlider: function (action) {
         var count = this.state.sliderCount
         var prev = this.state.currentIndex;
@@ -463,13 +476,13 @@ var MasterSlider = React.createClass({displayName: "MasterSlider",
         switch (action) {
             case 'prev':
                 current = (prev + count - 1) % count;
-                direction = "left";
-                bgPosition = bgPosition + 30;
+                direction = "right";
+                bgPosition = bgPosition - 30;
                 break;
             case 'next':
                 current = (prev + 1) % count;
-                direction = "right";
-                bgPosition = bgPosition - 30;
+                direction = "left";
+                bgPosition = bgPosition + 30;
                 break;
             default:
                 break;
@@ -494,16 +507,19 @@ var MasterSlider = React.createClass({displayName: "MasterSlider",
         var _state = this.state;
 
         datas.forEach(function (data, index) {
-            var _className = 'da-slide';
-
+            //set slider item.
+            var _sliderClassName = 'da-slide';
+            var _dotsClassName = '';
             if (_state.isFirst) {
-                _className += " da-slide-current";
+                _sliderClassName += " da-slide-current";
+                if (index == 0) { _dotsClassName += "da-dots-current"; }
             }
             else {
                 var strFormTo = null;
                 var strDirection = null;
                 if (_state.currentIndex == index) {
-                    _className += " da-slide-current";
+                    _dotsClassName += "da-dots-current";
+                    _sliderClassName += " da-slide-current";
                     strFormTo = "from";
                     switch (_state.moveDirection) {
                         case "right":
@@ -521,19 +537,19 @@ var MasterSlider = React.createClass({displayName: "MasterSlider",
                 }
 
                 //da-slide-fromright , da-slide-fromleft , da-slide-toright , da-slide-toleft
-                _className += " da-slide-" + strFormTo + strDirection;
+                _sliderClassName += " da-slide-" + strFormTo + strDirection;
             }
 
             domItems.push(
-                React.createElement("div", {key: 'divSlide_' + index, className: _className}, 
+                React.createElement("div", {key: 'divSlide_' + index, className: _sliderClassName}, 
                     React.createElement(ContentPannel, {key: 'homeContent_' + index, contents: data.contents}), 
                     React.createElement(MarkPannel, {key: 'homeMark_' + index, marks: data.marks}), 
                     React.createElement("div", {className: "da-img"}, React.createElement("img", {src: data.imageUrl, alt: "", style: imgCssStyle}))
                 )
             );
 
-
-            domDots.push(React.createElement("span", {className: "da-dots-current"}))
+            //set slider item.
+            domDots.push(React.createElement("span", {key: 'dots_' + index, className: _dotsClassName}))
         });
 
         var _cssStyle = { backgroundPosition: this.state.currentBgPosition + '% 0%' }
@@ -553,8 +569,6 @@ var MasterSlider = React.createClass({displayName: "MasterSlider",
         )
     }//===> render end
 });
-
-
 
 module.exports = MasterSlider;
 
@@ -595,7 +609,7 @@ var ClubIntroductionComp = require('./components/ClubIntroductionComp.js');
 var MartialArtsMaterialsComp = require('./components/MartialArtsMaterialsComp.js');
 var HomePageFooterComp = require('./components/HomePageFooterComp.js');
 
- 
+
 var _sliderItems = [
     {
         contents: ['泽雷随，内动外悦，人愿随从。', '内动之以德，外悦之以言', '则天下之人咸慕其行而随从之。'],
@@ -612,7 +626,7 @@ var _sliderItems = [
         marks: ['《随太极》', '第一章 第 4 至 5 小节'],
         imageUrl: 'assets/plugins/parallax-slider/img/taiji-03.jpg'
     }
-]; 
+];
 var mainComp = ReactDOM.render(
     React.createElement("div", null, 
         React.createElement(TopBarComp, null), 
@@ -630,10 +644,8 @@ var mainComp = ReactDOM.render(
         ), 
         React.createElement(HomePageFooterComp, null)
     ),
-    document.getElementById('app') 
-) 
-   
-
+    document.getElementById('app')
+)
 
 },{"./components/ClubIntroductionComp.js":1,"./components/FunctionPanelComp.js":2,"./components/HeaderBarComp.js":3,"./components/HomePageFooterComp.js":4,"./components/JoinUsComp.js":5,"./components/MartialArtsCircleComp.js":6,"./components/MartialArtsMaterialsComp.js":7,"./components/MasterSliderComp.js":8,"./components/TopBarComp.js":9,"react":181,"react-dom":37}],11:[function(require,module,exports){
 (function (process){

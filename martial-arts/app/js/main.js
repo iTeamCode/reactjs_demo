@@ -11,7 +11,7 @@ var ClubIntroductionComp = require('./components/ClubIntroductionComp.js');
 var MartialArtsMaterialsComp = require('./components/MartialArtsMaterialsComp.js');
 var HomePageFooterComp = require('./components/HomePageFooterComp.js');
 
- 
+
 var _sliderItems = [
     {
         contents: ['泽雷随，内动外悦，人愿随从。', '内动之以德，外悦之以言', '则天下之人咸慕其行而随从之。'],
@@ -28,7 +28,7 @@ var _sliderItems = [
         marks: ['《随太极》', '第一章 第 4 至 5 小节'],
         imageUrl: 'assets/plugins/parallax-slider/img/taiji-03.jpg'
     }
-]; 
+];
 var mainComp = ReactDOM.render(
     <div>
         <TopBarComp/>
@@ -38,14 +38,13 @@ var mainComp = ReactDOM.render(
         <div className="container">
             <div className="headline"><h3>随太极-圈子</h3></div>
             <FunctionPanelComp/>
-            <MartialArtsCircleComp /> 
-            <div className="row-fluid margin-bottom-20"> 
+            <MartialArtsCircleComp />
+            <div className="row-fluid margin-bottom-20">
                 <ClubIntroductionComp/>
                 <MartialArtsMaterialsComp/>
             </div>
         </div>
-        <HomePageFooterComp/> 
+        <HomePageFooterComp/>
     </div>,
-    document.getElementById('app') 
-) 
-   
+    document.getElementById('app')
+)
