@@ -1,9 +1,9 @@
 # Can also ignore all directories and files in a directory.
-bower_components
-bower_components/**/*
+martial-arts/bower_components
+martial-arts/bower_components/**/*
 
-dist
-dist/**/*
+martial-arts/dist
+martial-arts/dist/**/*
 
-node_modules
-node_modules/**/*
+martial-arts/node_modules
+martial-arts/node_modules/**/*
