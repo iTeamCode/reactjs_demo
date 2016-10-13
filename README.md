@@ -6,6 +6,7 @@
 
 ## install react
 &gt; npm install react --save
+&gt; npm install react-dom --save
 
 ## install tool
 &gt; npm install --save-dev gulp <br/>
