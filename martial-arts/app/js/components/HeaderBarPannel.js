@@ -77,21 +77,23 @@ var HomeNavBar = React.createClass({
                 text: '活动',
                 subMenus: [
                     { code: 1, text: '每日签到' },
-                    { code: 2, text: '套路练习' }
+                    { code: 2, text: '短期集训' },
+                    { code: 3, text: '太极赛事' }
                 ]
             }, {
                 code: 1002,
-                text: '拳谱',
+                text: '功法讲坛',
                 isActived: false,
                 showSubMenu: false,
                 subMenus: [
-                    { code: 1, text: '陈氏太极13式' },
-                    { code: 2, text: '老架一路' },
-                    { code: 3, text: '老架二路' }
+                    { code: 1, text: '大师论道' },
+                    { code: 2, text: '名家拳谱' },
+                    { code: 3, text: '名师谈拳' },
+                    { code: 4, text: '拳友交流' }
                 ]
             }, {
                 code: 1003,
-                text: '圈子拳谱',
+                text: '圈子',
                 isActived: false,
                 showSubMenu: false,
                 subMenus: [
