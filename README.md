@@ -5,7 +5,7 @@
 &gt; npm install -g bower
 
 ## install react
-&gt; npm install react --save
+&gt; npm install react --save <br/>
 &gt; npm install react-dom --save
 
 ## install tool
